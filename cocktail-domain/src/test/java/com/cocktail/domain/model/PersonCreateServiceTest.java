@@ -21,7 +21,6 @@ class PersonCreateServiceTest {
 	void testSavePersonService() {
 		Person person = new PersonTestDataBuilder().build();
 		PersonRepository personRepository =  Mockito.mock(PersonRepository.class);
-		Mockito.when(personRepository.save(person)).thenReturn(person);
 		Mockito.when(personRepository.findByEmail(person.getEmail())).thenReturn(person);
 		CreatePersonService personCreateService = new CreatePersonService(personRepository);
 		assertTrue(personCreateService.save(person));
@@ -33,7 +32,6 @@ class PersonCreateServiceTest {
 	void testSavePersonServiceMustThrowEmailAlreadyRegistredExceptionWhenEmailAssignedToAnotherUser() {
 		Person person = new PersonTestDataBuilder().build();
 		PersonRepository personRepository =  Mockito.mock(PersonRepository.class);
-		Mockito.when(personRepository.save(person)).thenReturn(person);
 		Mockito.when(personRepository.findByEmail(person.getEmail())).thenReturn(new PersonTestDataBuilder().withId(100L).build());
 		CreatePersonService personCreateService = new CreatePersonService(personRepository);
 		assertThrows(EmailAlreadyRegistredException.class,()->personCreateService.save(person));
@@ -44,7 +42,6 @@ class PersonCreateServiceTest {
 	void testSavePersonServiceMustSaveWhenNoEmailFound() {
 		Person person = new PersonTestDataBuilder().build();
 		PersonRepository personRepository =  Mockito.mock(PersonRepository.class);
-		Mockito.when(personRepository.save(person)).thenReturn(person);
 		Mockito.when(personRepository.findByEmail(person.getEmail())).thenReturn(null);
 		CreatePersonService personCreateService = new CreatePersonService(personRepository);
 		assertTrue(personCreateService.save(person));
@@ -55,7 +52,6 @@ class PersonCreateServiceTest {
 	void testSavePersonServiceMustSaveWhenSamePersonFound() {
 		Person person = new PersonTestDataBuilder().build();
 		PersonRepository personRepository =  Mockito.mock(PersonRepository.class);
-		Mockito.when(personRepository.save(person)).thenReturn(person);
 		Mockito.when(personRepository.findByEmail(person.getEmail())).thenReturn(person);
 		CreatePersonService personCreateService = new CreatePersonService(personRepository);
 		assertTrue(personCreateService.save(person));

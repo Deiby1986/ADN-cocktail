@@ -12,7 +12,7 @@ public class CommandPerson {
 	private String lastName;
 	private String phone;
 	private String email;
-	private LocalDate birthDate;
+	private String birthDate;
 	
 	public CommandPerson() {		
 	}
