@@ -8,12 +8,19 @@ import com.cocktail.domain.model.Person;
 import com.cocktail.domain.repository.PersonRepository;
 
 @Component
-public class PersonRepositoryRabbitMQ implements PersonRepository {
+public class PersonRepositoryActiveMQ implements PersonRepository {
+	
+	private ActiveMQSender activeMQSender;
+	
+	
+
+	public PersonRepositoryActiveMQ(ActiveMQSender activeMQSender) {
+		this.activeMQSender = activeMQSender;
+	}
 
 	@Override
 	public void save(Person person) {
-		// TODO Auto-generated method stub
-		
+		activeMQSender.sendMessage(person);		
 	}
 
 	@Override
