@@ -12,6 +12,9 @@ public class Person {
 	private String email;
 	private LocalDate birthDate;
 	
+	public Person() {		
+	}
+	
 	public Person(Long id, String fullName, String lastName, String phone, String email, LocalDate birthDate) {
 		this.id = id;
 		this.fullName = fullName;
