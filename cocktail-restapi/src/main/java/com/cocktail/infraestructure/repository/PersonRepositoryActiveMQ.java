@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.cocktail.domain.model.Person;
 import com.cocktail.domain.repository.PersonRepository;
+import com.cocktail.infraestructure.payload.mapper.PersonPayloadMapper;
 
 @Component
 public class PersonRepositoryActiveMQ implements PersonRepository {
@@ -20,7 +21,8 @@ public class PersonRepositoryActiveMQ implements PersonRepository {
 
 	@Override
 	public void save(Person person) {
-		activeMQSender.sendMessage(person);		
+		PersonPayloadMapper mapper = new PersonPayloadMapper();
+		activeMQSender.sendMessage(mapper.mapToPersonPayload(person));		
 	}
 
 	@Override
