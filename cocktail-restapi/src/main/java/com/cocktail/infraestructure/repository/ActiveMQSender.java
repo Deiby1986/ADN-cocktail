@@ -4,6 +4,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import com.cocktail.domain.model.Person;
+import com.cocktail.infraestructure.payload.PersonPayload;
 
 @Component
 public class ActiveMQSender {
@@ -18,7 +19,7 @@ public class ActiveMQSender {
 
 
 
-	public void sendMessage(Person person) {
+	public void sendMessage(PersonPayload person) {
 		template.convertAndSend(QUEUE_NAME, person);
 	}
 	
