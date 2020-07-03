@@ -6,8 +6,9 @@ import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
-import com.cocktail.application.factory.PersonFactory;
+import com.cocktail.application.commands.factory.PersonFactory;
 import com.cocktail.application.handlers.CreatePersonHandle;
+import com.cocktail.application.handlers.QueryPersonHandle;
 import com.cocktail.domain.repository.PersonRepository;
 import com.cocktail.domain.service.CreatePersonService;
 
@@ -17,6 +18,10 @@ public class SpringConfiguration {
 	@Bean
 	public CreatePersonHandle createPersonHandle(CreatePersonService createPersonService) {
 		return new CreatePersonHandle(createPersonService,new PersonFactory());
+	}
+	@Bean
+	public QueryPersonHandle createQueryPersonHandle(PersonRepository personRepository) {
+		return new QueryPersonHandle(personRepository);
 	}
 	
 	

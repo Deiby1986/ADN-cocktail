@@ -3,7 +3,6 @@ package com.cocktail.infraestructure.repository;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
-import com.cocktail.domain.model.Person;
 import com.cocktail.infraestructure.payload.PersonPayload;
 
 @Component
