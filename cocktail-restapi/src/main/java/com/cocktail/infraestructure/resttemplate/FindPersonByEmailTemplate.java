@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.cocktail.domain.model.dto.PersonDto;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Component
 public class FindPersonByEmailTemplate {
@@ -20,11 +21,17 @@ public class FindPersonByEmailTemplate {
 		restTemplate = new RestTemplate();
 	}
 	
+	@HystrixCommand(fallbackMethod = "callableMethod")
 	public PersonDto findPersonByEmail(String email) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
 	    return restTemplate.exchange(URL+"?email="+email, HttpMethod.GET, entity, PersonDto.class).getBody();
+	}
+	
+	public PersonDto callableMethod(){
+		return new PersonDto();
+		
 	}
 
 }

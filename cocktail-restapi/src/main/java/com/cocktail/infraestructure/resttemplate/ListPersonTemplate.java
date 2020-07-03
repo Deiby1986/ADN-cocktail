@@ -1,5 +1,6 @@
 package com.cocktail.infraestructure.resttemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.cocktail.domain.model.dto.PersonDto;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Component
 public class ListPersonTemplate {
@@ -22,12 +24,18 @@ public class ListPersonTemplate {
 		restTemplate = new RestTemplate();
 	}
 	
+	@HystrixCommand(fallbackMethod = "callableMethod")	
 	public List<PersonDto> listAllPerson(){
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
 	    ResponseEntity<PersonDto[]> response = restTemplate.exchange(URL, HttpMethod.GET, entity, PersonDto[].class);
 	    return Arrays.asList(response.getBody());
+	}
+	
+	public List<PersonDto> callableMethod(){
+		return new ArrayList<>();
+		
 	}
 
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cocktail.application.commands.CommandPerson;
 import com.cocktail.application.handlers.CreatePersonHandle;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/person")
 public class PersonCommandController {
@@ -19,6 +21,7 @@ public class PersonCommandController {
 	
 	
 	@PostMapping
+	@ApiOperation("Save person")
 	public void save(@RequestBody CommandPerson commandPerson) {
 		this.personHandle.save(commandPerson);
 	}
