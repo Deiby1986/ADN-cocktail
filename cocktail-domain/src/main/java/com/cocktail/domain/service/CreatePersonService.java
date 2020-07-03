@@ -23,7 +23,7 @@ public class CreatePersonService {
 		Person emailPerson = this.repository.findByEmail(person.getEmail());
 		if(emailPerson == null)
 			return;
-		if(emailPerson.getId().longValue() != person.getId().longValue()) {
+		if(person.getId() == null || emailPerson.getId().longValue() != person.getId().longValue()) {
 			throw new EmailAlreadyRegistredException();
 		}
 	}

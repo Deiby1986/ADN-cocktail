@@ -1,7 +1,7 @@
 package com.cocktail.application.handlers;
 
 import com.cocktail.application.commands.CommandPerson;
-import com.cocktail.application.factory.PersonFactory;
+import com.cocktail.application.commands.factory.PersonFactory;
 import com.cocktail.domain.model.Person;
 import com.cocktail.domain.service.CreatePersonService;
 

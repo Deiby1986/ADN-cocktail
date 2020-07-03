@@ -1,4 +1,4 @@
-package com.cocktail.application.factory;
+package com.cocktail.application.commands.factory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
