@@ -9,7 +9,7 @@ import com.cocktail.infraestructure.payload.PersonPayload;
 public class ActiveMQSender {
 	
 	private JmsTemplate template;
-	private final String QUEUE_NAME = "cocktail-test";
+	private static final String QUEUE_NAME = "cocktail-test";
 	
 	public ActiveMQSender(JmsTemplate template) {
 		this.template = template;
