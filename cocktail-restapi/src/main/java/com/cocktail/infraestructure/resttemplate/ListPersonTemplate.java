@@ -20,8 +20,8 @@ public class ListPersonTemplate {
 	RestTemplate restTemplate;
 	private static String URL = "http://localhost:8181/apiamq/person";
 	
-	public ListPersonTemplate() {
-		restTemplate = new RestTemplate();
+	public ListPersonTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
 	}
 	
 	@HystrixCommand(fallbackMethod = "callableMethod")	
