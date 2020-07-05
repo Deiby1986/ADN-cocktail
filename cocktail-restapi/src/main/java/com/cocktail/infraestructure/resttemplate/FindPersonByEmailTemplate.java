@@ -17,8 +17,8 @@ public class FindPersonByEmailTemplate {
 	RestTemplate restTemplate;
 	private static String URL = "http://localhost:8181/apiamq/person/email";
 	
-	public FindPersonByEmailTemplate() {
-		restTemplate = new RestTemplate();
+	public FindPersonByEmailTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
 	}
 	
 	@HystrixCommand(fallbackMethod = "callableMethod")
@@ -29,8 +29,8 @@ public class FindPersonByEmailTemplate {
 	    return restTemplate.exchange(URL+"?email="+email, HttpMethod.GET, entity, PersonDto.class).getBody();
 	}
 	
-	public PersonDto callableMethod(){
-		return new PersonDto();
+	public PersonDto callableMethod(String email){
+		return null;
 		
 	}
 

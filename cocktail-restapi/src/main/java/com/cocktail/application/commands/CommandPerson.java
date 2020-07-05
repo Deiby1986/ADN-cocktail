@@ -1,9 +1,13 @@
 package com.cocktail.application.commands;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommandPerson {
 	private Long id;
 	private String fullName;
@@ -12,8 +16,7 @@ public class CommandPerson {
 	private String email;
 	private String birthDate;
 	
-	public CommandPerson() {		
-	}
+	
 	
 	
 

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
+import org.springframework.web.client.RestTemplate;
 
 import com.cocktail.application.commands.factory.PersonFactory;
 import com.cocktail.application.handlers.CreatePersonHandle;
@@ -36,6 +37,11 @@ public class SpringConfiguration {
 		converter.setTargetType(MessageType.TEXT);
 		converter.setTypeIdPropertyName("_type");
 		return converter;
+	}
+	
+	@Bean 
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
 	}
 
 }
