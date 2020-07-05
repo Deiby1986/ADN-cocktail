@@ -8,9 +8,14 @@ public class PersonDto {
 	private String email;
 	private String birthDate;
 	public PersonDto() {
+		this.id = 0L;
+		this.fullName = "";
+		this.lastName = "";
+		this.phone = "";
+		this.email = "";
+		this.birthDate = "01/01/2000";
 	}
 	public PersonDto(Long id, String fullName, String lastName, String phone, String email, String birthDate) {
-		super();
 		this.id = id;
 		this.fullName = fullName;
 		this.lastName = lastName;
