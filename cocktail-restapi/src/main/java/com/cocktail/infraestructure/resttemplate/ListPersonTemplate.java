@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cocktail.domain.model.dto.PersonDto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @Component
 public class ListPersonTemplate {
@@ -24,12 +25,13 @@ public class ListPersonTemplate {
 		this.restTemplate = restTemplate;
 	}
 	
-	@HystrixCommand(fallbackMethod = "callableMethod")	
+	@HystrixCommand(fallbackMethod = "callableMethod",commandProperties = {@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "500")})	
 	public List<PersonDto> listAllPerson(){
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	    HttpEntity <String> entity = new HttpEntity<String>(headers);
 	    ResponseEntity<PersonDto[]> response = restTemplate.exchange(URL, HttpMethod.GET, entity, PersonDto[].class);
+	    System.out.print(Arrays.asList(response.getBody()));
 	    return Arrays.asList(response.getBody());
 	}
 	
