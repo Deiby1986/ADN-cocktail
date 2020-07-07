@@ -2,7 +2,6 @@ package com.cocktail.infraestructure.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor

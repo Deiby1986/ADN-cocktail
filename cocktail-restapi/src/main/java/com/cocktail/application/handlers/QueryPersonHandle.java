@@ -13,7 +13,7 @@ public class QueryPersonHandle {
 	}
 	
 	public List<PersonDto> listall(){
-		return personRepositoryActiveMQ.list();
+		return personRepositoryActiveMQ.list();		 
 	}
 	
 	
