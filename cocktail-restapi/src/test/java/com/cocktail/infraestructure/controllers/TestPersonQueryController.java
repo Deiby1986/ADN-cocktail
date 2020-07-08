@@ -35,8 +35,8 @@ classes = CocktailRestapiApplication.class)
 @AutoConfigureMockMvc
 class TestPersonQueryController {
 	
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+	/*@Autowired
+	private WebApplicationContext webApplicationContext;*/
 	
 	@Autowired
 	private MockMvc mockMvc;
