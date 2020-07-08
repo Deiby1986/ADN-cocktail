@@ -8,9 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.cocktail.infraestructure.security.jwt.JwtRequestFilter;
 
 
 
@@ -20,7 +24,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,7 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		permitAll().
 		anyRequest().
 		authenticated();
-		//http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/person").authenticated();
+		
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean
